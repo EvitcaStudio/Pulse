@@ -5,7 +5,7 @@ Diob.prototype.aListener = {
 	'onTickerAdd': { 'counter': 1 },
 	'onTickerRemove': { 'counter': 1 },
 	'onTick': { 'counter': 1 },
-	'onCross': { 'counter': 1 },
+	// 'onCross': { 'counter': 1 },
 	'onCrossed': { 'counter': 1 },
 	'onUncrossed': { 'counter': 1 },
 	'onCrossedRelocated': { 'counter': 1 },
@@ -30,15 +30,15 @@ Diob.prototype.aListener = {
 	'onClientSyncData': { 'counter': 1 },
 	'onResized': { 'counter': 1 },
 	'onBump': { 'counter': 1 },
-	'onMove': { 'counter': 1 },
+	// 'onMove': { 'counter': 1 },
 	'onMoved': { 'counter': 1 },
 	'onMoveStart': { 'counter': 1 },
 	'onMoveEnd': { 'counter': 1 },
 	'onRelocated': { 'counter': 1 },
 	'onScreenMoved': { 'counter': 1 },
 	'onDirUpdate': { 'counter': 1 },
-	'onEnter': { 'counter': 1 },
-	'onExit': { 'counter': 1 },
+	// 'onEnter': { 'counter': 1 },
+	// 'onExit': { 'counter': 1 },
 	'onEntered': { 'counter': 1 },
 	'onExited': { 'counter': 1 },
 	'onLogin': { 'counter': 1 },
@@ -67,15 +67,14 @@ Diob.prototype.aListener = {
 
 Diob.prototype.aListenForEvents = function() {
 	const self = this;
-	for (let prop in this) {
-		// If the event has the start word `on`. If it is indeed a function, and if the default events list 
-		// has a reference to the name of this function
-		if (prop.match(/^on/g) && typeof(this[prop]) === 'function' && Object.keys(this.aListener).includes(prop)) {
-			// To reference the current event
-			const event = prop;
+	for (let event of Object.keys(this.aListener)) {
+		// If the event has the start word `on`. If it is indeed a function or if it does not exist, recreate it to be compatibile for event listeners
+		if (event.match(/^on/g) && (typeof(this[event]) === 'function' || !this[event])) {
 			const oldFunc = this[event];
 			const newFunc = function() {
-				oldFunc.apply(self, arguments);
+				if (oldFunc && typeof(oldFunc) === 'function') {
+					oldFunc.apply(self, arguments);
+				}
 				for (const listener in self.aListener[event]) {
 					if (typeof(self.aListener[event][listener]) === 'function') {
 						self.aListener[event][listener].apply(self, arguments);

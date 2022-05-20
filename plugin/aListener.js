@@ -1,129 +1,118 @@
-// Object that will store the events you are listening to and the function to call when using it.
-Diob.prototype.aListener = {
-	'onNew': { 'counter': 1 },
-	'onDel': { 'counter': 1 },
-	'onTickerAdd': { 'counter': 1 },
-	'onTickerRemove': { 'counter': 1 },
-	'onTick': { 'counter': 1 },
-	// 'onCross': { 'counter': 1 },
-	'onCrossed': { 'counter': 1 },
-	'onUncrossed': { 'counter': 1 },
-	'onCrossedRelocated': { 'counter': 1 },
-	'onBumped': { 'counter': 1 },
-	'onMouseClick': { 'counter': 1 },
-	'onMouseDblClick': { 'counter': 1 },
-	'onMouseEnter': { 'counter': 1 },
-	'onMouseExit': { 'counter': 1 },
-	'onMouseMove': { 'counter': 1 },
-	'onMouseDown': { 'counter': 1 },
-	'onMouseUp': { 'counter': 1 },
-	'onMouseWheelScrollUp': { 'counter': 1 },
-	'onMouseWheelScrollDown': { 'counter': 1 },
-	'onScreenShow': { 'counter': 1 },
-	'onScreenHide': { 'counter': 1 },
-	'onAddOverlay': { 'counter': 1 },
-	'onRemoveOverlay': { 'counter': 1 },
-	'onIconUpdate': { 'counter': 1 },
-	'onMapChange': { 'counter': 1 },
-	'onTransition': { 'counter': 1 },
-	'onPacket': { 'counter': 1 },
-	'onClientSyncData': { 'counter': 1 },
-	'onResized': { 'counter': 1 },
-	'onBump': { 'counter': 1 },
-	// 'onMove': { 'counter': 1 },
-	'onMoved': { 'counter': 1 },
-	'onMoveStart': { 'counter': 1 },
-	'onMoveEnd': { 'counter': 1 },
-	'onRelocated': { 'counter': 1 },
-	'onScreenMoved': { 'counter': 1 },
-	'onDirUpdate': { 'counter': 1 },
-	// 'onEnter': { 'counter': 1 },
-	// 'onExit': { 'counter': 1 },
-	'onEntered': { 'counter': 1 },
-	'onExited': { 'counter': 1 },
-	'onLogin': { 'counter': 1 },
-	'onLogout': { 'counter': 1 },
-	'onStarted': { 'counter': 1 },
-	'onEnded': { 'counter': 1 },
-	'onStopped': { 'counter': 1 },
-	'onResumed': { 'counter': 1 },
-	'onFocus': { 'counter': 1 },
-	'onUnfocus': { 'counter': 1 },
-	'onShow': { 'counter': 1 },
-	'onHide': { 'counter': 1 },
-	'onExecute': { 'counter': 1 },
-	'onWindowResize': { 'counter': 1 },
-	'onWindowFocus': { 'counter': 1 },
-	'onWindowBlur': { 'counter': 1 },
-	'onScreenRender': { 'counter': 1 },
-	'onConnect': { 'counter': 1 },
-	'onDisconnect': { 'counter': 1 },
-	'onKeyDown': { 'counter': 1 },
-	'onKeyUp': { 'counter': 1 },
-	'onInterfaceLoaded': { 'counter': 1 },
-	'onInterfaceShow': { 'counter': 1 },
-	'onInterfaceHide': { 'counter': 1 },
-};
+(() => {
+	const aListener = {};
+	VS.global.aListener = aListener;
 
-Diob.prototype.aListenForEvents = function() {
-	const self = this;
-	for (let event of Object.keys(this.aListener)) {
-		// If the event has the start word `on`. If it is indeed a function or if it does not exist, recreate it to be compatibile for event listeners
-		if (event.match(/^on/g) && (typeof(this[event]) === 'function' || !this[event])) {
-			const oldFunc = this[event];
-			const newFunc = function() {
-				if (oldFunc && typeof(oldFunc) === 'function') {
-					oldFunc.apply(self, arguments);
-				}
-				for (const listener in self.aListener[event]) {
-					if (typeof(self.aListener[event][listener]) === 'function') {
-						self.aListener[event][listener].apply(self, arguments);
-					}
-				}
-			}
-			this[event] = newFunc;
+	aListener.addEventListener = function(pInstance, pEventName, pFunction) {
+		if (!pFunction || typeof(pFunction) !== 'function') {
+			console.error('aListener: pFunction parameter is missing or it is not of the function type!');
+			return;
 		}
-	}
-}
+		if (!pInstance.aListener) pInstance.aListener = Object.assign(this.events, {});
+		if (!pInstance.aListener[pEventName]) pInstance.aListener[pEventName] = { 'counter': 0 };
+		const listenerID = pInstance.aListener[pEventName].counter++;
+		if (!pInstance.aListened) pInstance.aListened = {};
+		if (!pInstance.aListened[pEventName]) this.listenForEvent(pInstance, pEventName);
+		pInstance.aListener[pEventName][listenerID] = pFunction;
+		// If the event name is `onNew` then call immedietly, there is no way to capture this event
+		if (pEventName === 'onNew') pInstance.aListener[pEventName][listenerID].bind(pInstance)();
+	};
 
-Diob.prototype.addEventListener = function(pEventName, pFunction) {
-	if (!pFunction || typeof(pFunction) !== 'function') {
-		console.error('aListener: pFunction parameter is missing or it is not of the function type!');
-		return;
-	}
-	if (Object.keys(this.aListener).includes(pEventName)) {
-		this.aListener[pEventName].counter++;
-		const listenerID = this.aListener[pEventName].counter;
-		this.aListener[pEventName][listenerID] = pFunction;
-	} else {
-		console.error('aListener: Invalid event name');
-	}
-};
-
-Diob.prototype.removeEventListener = function(pEventName, pFunction) {
-	if (!pFunction || typeof(pFunction) !== 'function') {
-		console.error('aListener: pFunction parameter is missing or it is not of the function type!');
-		return;
-	}
-	if (Object.keys(this.aListener).includes(pEventName)) {
-		for (const funcID in this.aListener[pEventName]) {
-			if (this.aListener[pEventName][funcID] === pFunction) {
-				delete this.aListener[pEventName][funcID];
+	aListener.removeEventListener = function(pInstance, pEventName, pFunction) {
+		if (!pFunction || typeof(pFunction) !== 'function') {
+			console.error('aListener: pFunction parameter is missing or it is not of the function type!');
+			return;
+		}
+		for (const listenerID in pInstance.aListener[pEventName]) {
+			if (pInstance.aListener[pEventName][listenerID] === pFunction) {
+				delete pInstance.aListener[pEventName][listenerID];
 				return;
 			}
 		}
 		console.error('aListener: This function is not being tracked.');
-	} else {
-		console.error('aListener: Invalid event name');
-	}
-}
+	};
 
-const onNewDefault = VS.Type.getFunction('Diob', 'onNew');
-const onNewCustom = function() {
-	this.aListenForEvents();
-	if (onNewDefault && typeof(onNewDefault) === 'function') {
-		onNewDefault.apply(this, arguments);
-	}
-}
+	aListener.listenForEvent = function(pInstance, pEventName) {
+		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
+		let originalEvent = this[pEventName];
+		const listener = function() {
+			if (originalEvent && typeof(originalEvent) === 'function') {
+				originalEvent.apply(pInstance, arguments);
+			}
+			for (const listener in pInstance.aListener[pEventName]) {
+				if (typeof(pInstance.aListener[pEventName][listener]) === 'function') {
+					pInstance.aListener[pEventName][listener].apply(pInstance, arguments);
+				}
+			}
+		}
+		pInstance[pEventName] = listener;
+		pInstance.aListened[pEventName] = true;
+	};
 
-VS.Type.setFunction('Diob', 'onNew', onNewCustom);
+	// Object that will store the events you are listening to and the function to call when using it.
+	aListener.events = {
+		// 'onNew': { 'counter': 0 },
+		'onDel': { 'counter': 0 },
+		'onTickerAdd': { 'counter': 0 },
+		'onTickerRemove': { 'counter': 0 },
+		'onTick': { 'counter': 0 },
+		// 'onCross': { 'counter': 0 },
+		'onCrossed': { 'counter': 0 },
+		'onUncrossed': { 'counter': 0 },
+		'onCrossedRelocated': { 'counter': 0 },
+		'onBumped': { 'counter': 0 },
+		'onMouseClick': { 'counter': 0 },
+		'onMouseDblClick': { 'counter': 0 },
+		'onMouseEnter': { 'counter': 0 },
+		'onMouseExit': { 'counter': 0 },
+		'onMouseMove': { 'counter': 0 },
+		'onMouseDown': { 'counter': 0 },
+		'onMouseUp': { 'counter': 0 },
+		'onMouseWheelScrollUp': { 'counter': 0 },
+		'onMouseWheelScrollDown': { 'counter': 0 },
+		'onScreenShow': { 'counter': 0 },
+		'onScreenHide': { 'counter': 0 },
+		'onAddOverlay': { 'counter': 0 },
+		'onRemoveOverlay': { 'counter': 0 },
+		'onIconUpdate': { 'counter': 0 },
+		'onMapChange': { 'counter': 0 },
+		'onTransition': { 'counter': 0 },
+		'onPacket': { 'counter': 0 },
+		'onClientSyncData': { 'counter': 0 },
+		'onResized': { 'counter': 0 },
+		'onBump': { 'counter': 0 },
+		// 'onMove': { 'counter': 0 },
+		'onMoved': { 'counter': 0 },
+		'onMoveStart': { 'counter': 0 },
+		'onMoveEnd': { 'counter': 0 },
+		'onRelocated': { 'counter': 0 },
+		'onScreenMoved': { 'counter': 0 },
+		'onDirUpdate': { 'counter': 0 },
+		// 'onEnter': { 'counter': 0 },
+		// 'onExit': { 'counter': 0 },
+		'onEntered': { 'counter': 0 },
+		'onExited': { 'counter': 0 },
+		'onLogin': { 'counter': 0 },
+		'onLogout': { 'counter': 0 },
+		'onStarted': { 'counter': 0 },
+		'onEnded': { 'counter': 0 },
+		'onStopped': { 'counter': 0 },
+		'onResumed': { 'counter': 0 },
+		'onFocus': { 'counter': 0 },
+		'onUnfocus': { 'counter': 0 },
+		'onShow': { 'counter': 0 },
+		'onHide': { 'counter': 0 },
+		'onExecute': { 'counter': 0 },
+		'onWindowResize': { 'counter': 0 },
+		'onWindowFocus': { 'counter': 0 },
+		'onWindowBlur': { 'counter': 0 },
+		'onScreenRender': { 'counter': 0 },
+		'onConnect': { 'counter': 0 },
+		'onDisconnect': { 'counter': 0 },
+		'onKeyDown': { 'counter': 0 },
+		'onKeyUp': { 'counter': 0 },
+		'onInterfaceLoaded': { 'counter': 0 },
+		'onInterfaceShow': { 'counter': 0 },
+		'onInterfaceHide': { 'counter': 0 },
+		// Add event functions for libraries
+	};
+})();

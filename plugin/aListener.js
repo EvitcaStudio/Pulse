@@ -2,29 +2,53 @@
 	const aListener = {};
 	VS.global.aListener = aListener;
 
+	aListener.tracker = {
+		'ids': []
+	};
+
+	aListener.generateID = function(pID = 7) {
+		let ID = '';
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		for (let i = 0; i < pID; i++) {
+			ID += chars.charAt(Math.floor(Math.random() * chars.length));
+		}
+		return ID;
+	}
+
 	aListener.addEventListener = function(pInstance, pEventName, pFunction) {
-		if (!pFunction || typeof(pFunction) !== 'function') {
+		if (typeof(pFunction) !== 'function') {
 			console.error('aListener: pFunction parameter is missing or it is not of the function type!');
 			return;
 		}
-		if (!pInstance.aListener) pInstance.aListener = {};
-		if (!pInstance.aListener[pEventName]) pInstance.aListener[pEventName] = { 'counter': 0 };
-		if (!pInstance.aListened) pInstance.aListened = {};
-		if (!pInstance.aListened[pEventName]) this.listenForEvent(pInstance, pEventName);
-		const listenerID = pInstance.aListener[pEventName].counter++;
-		pInstance.aListener[pEventName][listenerID] = pFunction;
+
+		if (!pInstance.aListenerID) {
+			let id = this.generateID();
+			while (this.tracker.ids.includes(id)) {
+				id = this.generateID();
+			}
+			pInstance.aListenerID = id;
+			this.tracker.ids.push(id);
+			this.tracker[pInstance.aListenerID] = {};
+			this.tracker[pInstance.aListenerID]['listened'] = {};
+		}
+
+		if (!this.tracker[pInstance.aListenerID][pEventName]) this.tracker[pInstance.aListenerID][pEventName] = { 'counter': 0 };
+		const listenerID = ++this.tracker[pInstance.aListenerID][pEventName].counter;
+		if (!this.tracker[pInstance.aListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);
+		this.tracker[pInstance.aListenerID][pEventName][listenerID] = pFunction;
 		// If the event name is `onNew` then call immedietly, there is no way to capture this event
-		if (pEventName === 'onNew') pInstance.aListener[pEventName][listenerID].bind(pInstance)();
+		if (pEventName === 'onNew') this.tracker[pInstance.aListenerID][pEventName][listenerID].bind(pInstance)();
 	};
 
 	aListener.removeEventListener = function(pInstance, pEventName, pFunction) {
-		if (!pFunction || typeof(pFunction) !== 'function') {
+		if (typeof(pFunction) !== 'function') {
 			console.error('aListener: pFunction parameter is missing or it is not of the function type!');
 			return;
 		}
-		for (const listenerID in pInstance.aListener[pEventName]) {
-			if (pInstance.aListener[pEventName][listenerID] === pFunction) {
-				delete pInstance.aListener[pEventName][listenerID];
+		for (const listenerID in this.tracker[pInstance.aListenerID][pEventName]) {
+			if (this.tracker[pInstance.aListenerID][pEventName][listenerID] === pFunction) {
+				delete this.tracker[pInstance.aListenerID][pEventName][listenerID];
 				return;
 			}
 		}
@@ -38,13 +62,13 @@
 			if (originalEvent && typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);
 			}
-			for (const listener in pInstance.aListener[pEventName]) {
-				if (typeof(pInstance.aListener[pEventName][listener]) === 'function') {
-					pInstance.aListener[pEventName][listener].apply(pInstance, arguments);
+			for (const listener in VS.global.aListener.tracker[pInstance.aListenerID][pEventName]) {
+				if (typeof(VS.global.aListener.tracker[pInstance.aListenerID][pEventName][listener]) === 'function') {
+					VS.global.aListener.tracker[pInstance.aListenerID][pEventName][listener].apply(pInstance, arguments);
 				}
 			}
 		}
 		pInstance[pEventName] = listener;
-		pInstance.aListened[pEventName] = true;
+		this.tracker[pInstance.aListenerID]['listened'][pEventName] = true;
 	};
 })();

@@ -57,7 +57,7 @@
 
 	aListener.listenForEvent = function(pInstance, pEventName) {
 		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
-		let originalEvent = this[pEventName];
+		let originalEvent = pInstance[pEventName];
 		const listener = function() {
 			if (originalEvent && typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);

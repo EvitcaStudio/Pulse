@@ -6,13 +6,22 @@
 		'ids': []
 	};
 
-	aListener.generateID = function(pID = 7) {
-		let ID = '';
-		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	aListener.storedIDs = [];
 
-		for (let i = 0; i < pID; i++) {
-			ID += chars.charAt(Math.floor(Math.random() * chars.length));
+	aListener.generateID = function(pID = 7) {
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		const makeID = function() {
+			let ID = '';
+			for (let i = 0; i < pID; i++) {
+				ID += chars.charAt(Math.floor(Math.random() * chars.length));
+			}
+			return ID;
 		}
+		let ID = makeID();
+		while(this.storedIDs.includes(ID)) {
+			ID = makeID();
+		}
+		this.storedIDs.push(ID);
 		return ID;
 	}
 
@@ -23,12 +32,9 @@
 		}
 
 		if (!pInstance.aListenerID) {
-			let id = this.generateID();
-			while (this.tracker.ids.includes(id)) {
-				id = this.generateID();
-			}
-			pInstance.aListenerID = id;
-			this.tracker.ids.push(id);
+			const ID = this.generateID();
+			pInstance.aListenerID = ID;
+			this.tracker.ids.push(ID);
 			this.tracker[pInstance.aListenerID] = {};
 			this.tracker[pInstance.aListenerID]['listened'] = {};
 		}

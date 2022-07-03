@@ -1,6 +1,8 @@
 (() => {
 	const aListener = {};
 	VS.global.aListener = aListener;
+	if (global) global.aListener = aListener;
+	if (window) window.aListener = aListener;
 
 	aListener.tracker = {
 		'ids': []

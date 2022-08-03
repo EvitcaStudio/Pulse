@@ -67,7 +67,7 @@
 		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
 		let originalEvent = pInstance[pEventName];
 		const listener = function() {
-			if (originalEvent && typeof(originalEvent) === 'function') {
+			if (typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);
 			}
 			for (const listener in VS.global.aListener.tracker[pInstance.aListenerID][pEventName]) {

@@ -1,5 +1,5 @@
 (() => {
-	class AListenerManager {
+	class AListener {
 		constructor() {
 			this.tracker = { 'ids': [] };
 			this.storedIDs = [];
@@ -78,9 +78,8 @@
 		};
 	}
 	
-	const AListener = new AListenerManager();
-	VS.global.AListener = AListener;
-	if (VS.World.getCodeType() === 'server') global.AListener = AListener;
-	if (VS.World.getCodeType() !== 'server') window.AListener = AListener;
-	if (VS.World.getCodeType() !== 'server') console.log("%cAListener.js: ✅ AListener.js@" + AListener.version, "font-family:arial;");
+	const AListenerManager = new AListener();
+	globalThis.AListener = AListenerManager;
+	VS.global.AListener = AListenerManager;
+	if (globalThis.document) console.log("%cAListener.js: ✅ AListener.js@" + AListenerManager.version, "font-family:arial;");
 })();

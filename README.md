@@ -4,7 +4,7 @@ A plugin that allows you to add event listeners on objects. Have your code calle
 ## Implementation 
 
 ### `CLIENT-SIDE`  
-#### #INCLUDE SCRIPT AListener.js  
+#### #INCLUDE SCRIPT alistener.min.js  
 ### `SERVER-SIDE` 
 #### #INCLUDE SERSCRIPT alistener.min.js  
 

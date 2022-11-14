@@ -6,7 +6,7 @@ A plugin that allows you to add event listeners on objects. Have your code calle
 ### `CLIENT-SIDE`  
 #### #INCLUDE SCRIPT AListener.js  
 ### `SERVER-SIDE` 
-#### #INCLUDE SERSCRIPT AListener.js  
+#### #INCLUDE SERSCRIPT alistener.min.js  
 
 ## How to reference  
 ### `Javascript`

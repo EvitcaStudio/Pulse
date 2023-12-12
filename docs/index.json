@@ -1,0 +1,868 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/pulse.mjs",
+    "content": "import { Logger } from './vendor/logger.min.mjs';\r\n\r\nclass PulseComponent {\r\n\t/**\r\n\t * Array that tracks events for instances\r\n\t * @type {Array}\r\n\t */\r\n\tstatic tracker = { 'ids': [] };\r\n\t/**\r\n\t * Array of stored IDs so that multiple of the same ID cannot be claimed\r\n\t * @type {Array}\r\n\t */\r\n\tstatic storedIDs = [];\r\n\r\n\tconstructor() {\r\n\t\tthis.logger = new Logger();\r\n        this.logger.registerType('PulseComponent-Module', this.logger.FG_BLUE);\r\n        this.logger.prefix('PulseComponent-Module').log('PulseComponent module loaded');\r\n\t}\r\n\t\r\n\t/**\r\n\t * Generates a random ID based on the specified length and ensures its uniqueness\r\n\t * within the stored IDs.\r\n\t * \r\n\t * @param {number} [pID = 7] - The length of the generated ID.\r\n\t * @returns {string} A unique random ID.\r\n\t */\r\n\tgenerateID(pID = 7) {\r\n\t\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r\n\t\tconst makeID = function() {\r\n\t\t\tlet ID = '';\r\n\t\t\tfor (let i = 0; i < pID; i++) {\r\n\t\t\t\tID += chars.charAt(Math.floor(Math.random() * chars.length));\r\n\t\t\t}\r\n\t\t\treturn ID;\r\n\t\t}\r\n\t\tlet ID = makeID();\r\n\t\twhile(this.storedIDs.includes(ID)) {\r\n\t\t\tID = makeID();\r\n\t\t}\r\n\t\tthis.storedIDs.push(ID);\r\n\t\treturn ID;\r\n\t}\r\n\t/**\r\n\t * Adds an event listener function to pInstance to call whenever pEventName is called\r\n\t * \r\n\t * @param {Object} pInstance - The instance to add an event listener to\r\n\t * @param {string} pEventName - The name of the event to add the listener to\r\n\t * @param {Function} pFunction - The function to be called when this event is called\r\n\t */\r\n\ton(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\r\n\t\tif (!pInstance.pulseComponentListenerID) {\r\n\t\t\tconst ID = this.generateID();\r\n\t\t\tpInstance.pulseComponentListenerID = ID;\r\n\t\t\tPulseComponent.tracker.ids.push(ID);\r\n\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID] = {};\r\n\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'] = {};\r\n\t\t}\r\n\r\n\t\tif (!PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName] = { 'counter': 0 };\r\n\t\tconst listenerID = ++PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName].counter;\r\n\t\tif (!PulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);\r\n\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] = pFunction;\r\n\t\t// If the event name is `onNew` then call immedietly, there is no way to capture this event\r\n\t\tif (pEventName === 'onNew') PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();\r\n\t};\r\n\r\n\t/**\r\n\t * Removes an event listener function from pInstance\r\n\t * \r\n\t * @param {Object} pInstance - The instance to remove the event listener from\r\n\t * @param {string} pEventName - The name of the event to remove\r\n\t * @param {Function} pFunction - The function to be removed\r\n\t */\r\n\toff(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfor (const listenerID in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {\r\n\t\t\tif (PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] === pFunction) {\r\n\t\t\t\tdelete PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID];\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t}\r\n\t\tthis.logger.prefix('PulseComponent-Module').error('This function is not being tracked.');\r\n\t};\r\n\r\n\t/**\r\n\t * Listens for an event on an instance, modifies the original event if one was defined so that it can be listened to. Original event's code is maintained.\r\n\t * @param {Object} pInstance - The instance that has the event\r\n\t * @param {string} pEventName - The event name to listen for\r\n\t */\r\n\tlistenForEvent(pInstance, pEventName) {\r\n\t\t// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events\r\n\t\tlet originalEvent = pInstance[pEventName];\r\n\t\tconst listener = function() {\r\n\t\t\tif (typeof(originalEvent) === 'function') {\r\n\t\t\t\toriginalEvent.apply(pInstance, arguments);\r\n\t\t\t}\r\n\t\t\t// Loop the event name in the tracker to see if multiple events are attached, if so we need to call each event when this event is called.\r\n\t\t\tfor (const listener in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {\r\n\t\t\t\tif (typeof(PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener]) === 'function') {\r\n\t\t\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tpInstance[pEventName] = listener;\r\n\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName] = true;\r\n\t};\r\n}\r\n\r\nexport const Pulse = new PulseComponent();\r\n",
+    "static": true,
+    "longname": "C:/Users/jared/Documents/Github/EListener/src/pulse.mjs",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "Pulse",
+    "memberof": "src/pulse.mjs",
+    "static": true,
+    "longname": "src/pulse.mjs~Pulse",
+    "access": "public",
+    "export": true,
+    "importPath": "./src/pulse.mjs",
+    "importStyle": "{Pulse}",
+    "description": null,
+    "lineNumber": 118,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/pulse.mjs~PulseComponent"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "class",
+    "name": "PulseComponent",
+    "memberof": "src/pulse.mjs",
+    "static": true,
+    "longname": "src/pulse.mjs~PulseComponent",
+    "access": "public",
+    "export": true,
+    "importPath": "./src/pulse.mjs",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "pseudoExport": true,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "tracker",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "static": true,
+    "longname": "src/pulse.mjs~PulseComponent.tracker",
+    "access": "public",
+    "description": "Array that tracks events for instances",
+    "lineNumber": 8,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "storedIDs",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "static": true,
+    "longname": "src/pulse.mjs~PulseComponent.storedIDs",
+    "access": "public",
+    "description": "Array of stored IDs so that multiple of the same ID cannot be claimed",
+    "lineNumber": 13,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "logger",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#logger",
+    "access": "public",
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "generateID",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#generateID",
+    "access": "public",
+    "description": "Generates a random ID based on the specified length and ensures its uniqueness\nwithin the stored IDs.",
+    "lineNumber": 28,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{string} A unique random ID."
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": " 7",
+        "defaultRaw": 7,
+        "name": "pID",
+        "description": "The length of the generated ID."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "A unique random ID."
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "on",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#on",
+    "access": "public",
+    "description": "Adds an event listener function to pInstance to call whenever pEventName is called",
+    "lineNumber": 51,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pInstance",
+        "description": "The instance to add an event listener to"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pEventName",
+        "description": "The name of the event to add the listener to"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pFunction",
+        "description": "The function to be called when this event is called"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "off",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#off",
+    "access": "public",
+    "description": "Removes an event listener function from pInstance",
+    "lineNumber": 80,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pInstance",
+        "description": "The instance to remove the event listener from"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pEventName",
+        "description": "The name of the event to remove"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pFunction",
+        "description": "The function to be removed"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "listenForEvent",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#listenForEvent",
+    "access": "public",
+    "description": "Listens for an event on an instance, modifies the original event if one was defined so that it can be listened to. Original event's code is maintained.",
+    "lineNumber": 99,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pInstance",
+        "description": "The instance that has the event"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pEventName",
+        "description": "The event name to listen for"
+      }
+    ],
+    "return": null
+  },
+  {
+    "kind": "index",
+    "content": "# Pulse\r\nA plugin that allows you to add event listeners on objects. Have your code called alongside an event!",
+    "longname": "C:\\Users\\jared\\Documents\\Github\\EListener\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\r\n    \"dependencies\": {\r\n      \"esdoc\": \"^1.1.0\",\r\n      \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\r\n      \"esdoc-standard-plugin\": \"^1.0.0\",\r\n      \"uglify-js\": \"^3.17.4\",\r\n      \"webpack\": \"^5.89.0\"\r\n    },\r\n    \"scripts\": {\r\n      \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\r\n      \"build-dist\": \"npx webpack && uglifyjs dist/pulse.min.mjs -m -c --comments -o dist/pulse.min.mjs && esdoc -c esdoc.json\"\r\n    },\r\n    \"devDependencies\": {\r\n      \"webpack-cli\": \"^5.1.4\"\r\n    }\r\n  }\r\n  ",
+    "longname": "C:\\Users\\jared\\Documents\\Github\\EListener\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

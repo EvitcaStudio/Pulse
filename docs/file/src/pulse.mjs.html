@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/pulse.mjs | Pulse</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A plugin that allows you to add event listeners on objects. Have your code called alongside an event!"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Pulse"><meta property="twitter:description" content="A plugin that allows you to add event listeners on objects. Have your code called alongside an event!"><meta property="twitter:image" content="./evitcastudio_round_branding.png"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./" style="display: flex; align-items: center;"><img src="./image/brand_logo.png" style="width:34px;"></a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/EvitcaStudio/Pulse"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/pulse.mjs~PulseComponent.html">PulseComponent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Pulse">Pulse</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/pulse.mjs</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Logger } from &apos;./vendor/logger.min.mjs&apos;;
+
+class PulseComponent {
+	/**
+	 * Array that tracks events for instances
+	 * @type {Array}
+	 */
+	static tracker = { &apos;ids&apos;: [] };
+	/**
+	 * Array of stored IDs so that multiple of the same ID cannot be claimed
+	 * @type {Array}
+	 */
+	static storedIDs = [];
+
+	constructor() {
+		this.logger = new Logger();
+        this.logger.registerType(&apos;PulseComponent-Module&apos;, this.logger.FG_BLUE);
+        this.logger.prefix(&apos;PulseComponent-Module&apos;).log(&apos;PulseComponent module loaded&apos;);
+	}
+	
+	/**
+	 * Generates a random ID based on the specified length and ensures its uniqueness
+	 * within the stored IDs.
+	 * 
+	 * @param {number} [pID = 7] - The length of the generated ID.
+	 * @returns {string} A unique random ID.
+	 */
+	generateID(pID = 7) {
+		const chars = &apos;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&apos;;
+		const makeID = function() {
+			let ID = &apos;&apos;;
+			for (let i = 0; i &lt; pID; i++) {
+				ID += chars.charAt(Math.floor(Math.random() * chars.length));
+			}
+			return ID;
+		}
+		let ID = makeID();
+		while(this.storedIDs.includes(ID)) {
+			ID = makeID();
+		}
+		this.storedIDs.push(ID);
+		return ID;
+	}
+	/**
+	 * Adds an event listener function to pInstance to call whenever pEventName is called
+	 * 
+	 * @param {Object} pInstance - The instance to add an event listener to
+	 * @param {string} pEventName - The name of the event to add the listener to
+	 * @param {Function} pFunction - The function to be called when this event is called
+	 */
+	on(pInstance, pEventName, pFunction) {
+		if (typeof(pFunction) !== &apos;function&apos;) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pFunction argument is missing or it is not of the function type!&apos;);
+			return;
+		}
+
+		if (!pInstance.pulseComponentListenerID) {
+			const ID = this.generateID();
+			pInstance.pulseComponentListenerID = ID;
+			PulseComponent.tracker.ids.push(ID);
+			PulseComponent.tracker[pInstance.pulseComponentListenerID] = {};
+			PulseComponent.tracker[pInstance.pulseComponentListenerID][&apos;listened&apos;] = {};
+		}
+
+		if (!PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName] = { &apos;counter&apos;: 0 };
+		const listenerID = ++PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName].counter;
+		if (!PulseComponent.tracker[pInstance.pulseComponentListenerID][&apos;listened&apos;][pEventName]) this.listenForEvent(pInstance, pEventName);
+		PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] = pFunction;
+		// If the event name is `onNew` then call immedietly, there is no way to capture this event
+		if (pEventName === &apos;onNew&apos;) PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();
+	};
+
+	/**
+	 * Removes an event listener function from pInstance
+	 * 
+	 * @param {Object} pInstance - The instance to remove the event listener from
+	 * @param {string} pEventName - The name of the event to remove
+	 * @param {Function} pFunction - The function to be removed
+	 */
+	off(pInstance, pEventName, pFunction) {
+		if (typeof(pFunction) !== &apos;function&apos;) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pFunction argument is missing or it is not of the function type!&apos;);
+			return;
+		}
+		for (const listenerID in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {
+			if (PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] === pFunction) {
+				delete PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID];
+				return;
+			}
+		}
+		this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;This function is not being tracked.&apos;);
+	};
+
+	/**
+	 * Listens for an event on an instance, modifies the original event if one was defined so that it can be listened to. Original event&apos;s code is maintained.
+	 * @param {Object} pInstance - The instance that has the event
+	 * @param {string} pEventName - The event name to listen for
+	 */
+	listenForEvent(pInstance, pEventName) {
+		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
+		let originalEvent = pInstance[pEventName];
+		const listener = function() {
+			if (typeof(originalEvent) === &apos;function&apos;) {
+				originalEvent.apply(pInstance, arguments);
+			}
+			// Loop the event name in the tracker to see if multiple events are attached, if so we need to call each event when this event is called.
+			for (const listener in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {
+				if (typeof(PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener]) === &apos;function&apos;) {
+					PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);
+				}
+			}
+		}
+		pInstance[pEventName] = listener;
+		PulseComponent.tracker[pInstance.pulseComponentListenerID][&apos;listened&apos;][pEventName] = true;
+	};
+}
+
+export const Pulse = new PulseComponent();
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -35,10 +35,10 @@ class PulseComponent {
 			return ID;
 		}
 		let ID = makeID();
-		while(this.storedIDs.includes(ID)) {
+		while(PulseComponent.storedIDs.includes(ID)) {
 			ID = makeID();
 		}
-		this.storedIDs.push(ID);
+		PulseComponent.storedIDs.push(ID);
 		return ID;
 	}
 	/**

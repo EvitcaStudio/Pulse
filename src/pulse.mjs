@@ -3,16 +3,22 @@ import { Logger } from './vendor/logger.min.mjs';
 class PulseComponent {
 	/**
 	 * Array that tracks events for instances
+	 * @private
 	 * @type {Array}
 	 */
 	static tracker = { 'ids': [] };
 	/**
 	 * Array of stored IDs so that multiple of the same ID cannot be claimed
+	 * @private
 	 * @type {Array}
 	 */
 	static storedIDs = [];
 
 	constructor() {
+		/**
+		 * The logger module this module uses to log errors / logs
+		 * @private
+		 */
 		this.logger = new Logger();
         this.logger.registerType('PulseComponent-Module', this.logger.FG_BLUE);
         this.logger.prefix('PulseComponent-Module').log('PulseComponent module loaded');
@@ -21,7 +27,7 @@ class PulseComponent {
 	/**
 	 * Generates a random ID based on the specified length and ensures its uniqueness
 	 * within the stored IDs.
-	 * 
+	 * @private
 	 * @param {number} [pID = 7] - The length of the generated ID.
 	 * @returns {string} A unique random ID.
 	 */
@@ -93,6 +99,7 @@ class PulseComponent {
 
 	/**
 	 * Listens for an event on an instance, modifies the original event if one was defined so that it can be listened to. Original event's code is maintained.
+	 * @private
 	 * @param {Object} pInstance - The instance that has the event
 	 * @param {string} pEventName - The event name to listen for
 	 */

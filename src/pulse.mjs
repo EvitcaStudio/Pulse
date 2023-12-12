@@ -18,6 +18,7 @@ class PulseComponent {
 		/**
 		 * The logger module this module uses to log errors / logs
 		 * @private
+		 * @type {Object}
 		 */
 		this.logger = new Logger();
         this.logger.registerType('PulseComponent-Module', this.logger.FG_BLUE);
@@ -98,7 +99,7 @@ class PulseComponent {
 	};
 
 	/**
-	 * Listens for an event on an instance, modifies the original event if one was defined so that it can be listened to. Original event's code is maintained.
+	 * Listens for an event on an instance. Preserves any original event function code, while also allowing multiple event listeners to call on the same event.
 	 * @private
 	 * @param {Object} pInstance - The instance that has the event
 	 * @param {string} pEventName - The event name to listen for
@@ -110,7 +111,7 @@ class PulseComponent {
 			if (typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);
 			}
-			// Loop the event name in the tracker to see if multiple events are attached, if so we need to call each event when this event is called.
+			// Loop the event name in the tracker to see if multiple events have been registered, if so we need to call each event when this event is dispatched.
 			for (const listener in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {
 				if (typeof(PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener]) === 'function') {
 					PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);

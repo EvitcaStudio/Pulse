@@ -59,8 +59,8 @@ class PulseComponent {
 		 * @type {Object}
 		 */
 		this.logger = new Logger();
-        this.logger.registerType(&apos;PulseComponent-Module&apos;, this.logger.FG_BLUE);
-        this.logger.prefix(&apos;PulseComponent-Module&apos;).log(&apos;PulseComponent module loaded&apos;);
+        this.logger.registerType(&apos;PulseComponent-Module&apos;, this.logger.FG_MAGENTA);
+        this.logger.prefix(&apos;PulseComponent-Module&apos;).log(`&#x2705;@v${__VERSION__}`);
 	}
 	
 	/**

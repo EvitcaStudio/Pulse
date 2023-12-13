@@ -1,4 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
+const packageJson = require('./package.json');
+
 module.exports = {
     entry: {
         pulse: './src/pulse.mjs',
@@ -14,6 +17,11 @@ module.exports = {
         type: 'module'
       },
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        '__VERSION__': JSON.stringify(packageJson.version),
+      }),
+    ],
     module: {
       rules: [
         {

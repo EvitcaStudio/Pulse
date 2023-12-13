@@ -21,7 +21,7 @@ class PulseComponent {
 		 * @type {Object}
 		 */
 		this.logger = new Logger();
-        this.logger.registerType('PulseComponent-Module', this.logger.FG_MAGENTA);
+        this.logger.registerType('PulseComponent-Module', '#ff6600');
         this.logger.prefix('PulseComponent-Module').log(`✅@v${__VERSION__}`);
 	}
 	

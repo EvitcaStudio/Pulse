@@ -9,7 +9,7 @@
     },
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "build-dist": "npx webpack && uglifyjs dist/pulse.min.mjs -m -c --comments -o dist/pulse.min.mjs && esdoc -c esdoc.json"
+      "build-dist": "npx webpack && uglifyjs dist/pulse.min.mjs -m -c --comments -o dist/pulse.min.mjs && node version-handler.js && esdoc -c esdoc.json"
     },
     "devDependencies": {
       "webpack-cli": "^5.1.4"

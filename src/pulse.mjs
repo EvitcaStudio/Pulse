@@ -3,7 +3,7 @@ import { Logger } from './vendor/logger.min.mjs';
 /** 
  * @file A plugin that allows you to add event listeners on objects. Have your code called alongside an event!
  * 
- * @version {@versionPlaceholder}
+ * @version __VERSION__
  * @author https://github.com/doubleactii
  * @copyright Copyright (c) 2022 Evitca Studio
  * @license Pulse is free software, available under the terms of a MIT style License.
@@ -36,7 +36,7 @@ class PulseComponent {
 		 */
 		this.logger = new Logger();
         this.logger.registerType('PulseComponent-Module', '#ff6600');
-        this.logger.prefix('PulseComponent-Module').log(`✅@v${__VERSION__}`);
+        this.logger.prefix('PulseComponent-Module').log(`✅@v__VERSION__`);
 	}
 	
 	/**

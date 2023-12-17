@@ -21,6 +21,12 @@ class PulseComponent {
 	 * @type {Array}
 	 */
 	static storedIDs = [];
+	/**
+	 * Weakmap to track data belonging to instances used in this module.
+	 * @private
+	 * @type {WeakMap}
+	 */
+	instanceWeakMap = new WeakMap();
 
 	constructor() {
 		/**
@@ -69,20 +75,23 @@ class PulseComponent {
 			return;
 		}
 
-		if (!pInstance.pulseComponentListenerID) {
+		// Get the data stored for this instance
+		let pulseComponentListenerID = this.instanceWeakMap.get(pInstance);
+		// If it couldn't get any data stored, we need to generate an ID and store it
+		if (!pulseComponentListenerID) {
 			const ID = this.generateID();
-			pInstance.pulseComponentListenerID = ID;
-			PulseComponent.tracker.ids.push(ID);
-			PulseComponent.tracker[pInstance.pulseComponentListenerID] = {};
-			PulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'] = {};
+			pulseComponentListenerID = ID;
+			this.instanceWeakMap.set(pInstance, pulseComponentListenerID);
+			PulseComponent.tracker.ids.push(pulseComponentListenerID);
+			PulseComponent.tracker[pulseComponentListenerID] = {};
+			PulseComponent.tracker[pulseComponentListenerID]['listened'] = {};
 		}
-
-		if (!PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName] = { 'counter': 0 };
-		const listenerID = ++PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName].counter;
-		if (!PulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);
-		PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] = pFunction;
+		if (!PulseComponent.tracker[pulseComponentListenerID][pEventName]) PulseComponent.tracker[pulseComponentListenerID][pEventName] = { 'counter': 0 };
+		const listenerID = ++PulseComponent.tracker[pulseComponentListenerID][pEventName].counter;
+		if (!PulseComponent.tracker[pulseComponentListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);
+		PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID] = pFunction;
 		// If the event name is `onNew` then call immedietly, there is no way to capture this event
-		if (pEventName === 'onNew') PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();
+		if (pEventName === 'onNew') PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();
 	};
 
 	/**
@@ -97,9 +106,14 @@ class PulseComponent {
 			this.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');
 			return;
 		}
-		for (const listenerID in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {
-			if (PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] === pFunction) {
-				delete PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID];
+		// Get the data stored for this instance
+		const pulseComponentListenerID = this.instanceWeakMap.get(pInstance);
+		// No event can be removed from this instance as its not even being tracked
+		if (!pulseComponentListenerID) return;
+
+		for (const listenerID in PulseComponent.tracker[pulseComponentListenerID][pEventName]) {
+			if (PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID] === pFunction) {
+				delete PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID];
 				return;
 			}
 		}
@@ -115,19 +129,21 @@ class PulseComponent {
 	listenForEvent(pInstance, pEventName) {
 		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
 		let originalEvent = pInstance[pEventName];
+		// Get the data stored for this instance
+		const pulseComponentListenerID = this.instanceWeakMap.get(pInstance);
 		const listener = function() {
 			if (typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);
 			}
 			// Loop the event name in the tracker to see if multiple events have been registered, if so we need to call each event when this event is dispatched.
-			for (const listener in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {
-				if (typeof(PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener]) === 'function') {
-					PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);
+			for (const listener in PulseComponent.tracker[pulseComponentListenerID][pEventName]) {
+				if (typeof(PulseComponent.tracker[pulseComponentListenerID][pEventName][listener]) === 'function') {
+					PulseComponent.tracker[pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);
 				}
 			}
 		}
 		pInstance[pEventName] = listener;
-		PulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName] = true;
+		PulseComponent.tracker[pulseComponentListenerID]['listened'][pEventName] = true;
 	};
 }
 

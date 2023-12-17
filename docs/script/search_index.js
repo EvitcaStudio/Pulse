@@ -312,6 +312,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/pulse.mjs~pulsecomponent#instanceweakmap",
+    "class/src/pulse.mjs~PulseComponent.html#instance-member-instanceWeakMap",
+    "src/pulse.mjs~PulseComponent#instanceWeakMap",
+    "member"
+  ],
+  [
     "src/pulse.mjs~pulsecomponent#listenforevent",
     "class/src/pulse.mjs~PulseComponent.html#instance-method-listenForEvent",
     "src/pulse.mjs~PulseComponent#listenForEvent",

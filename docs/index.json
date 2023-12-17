@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/pulse.mjs",
-    "content": "import { Logger } from './vendor/logger.min.mjs';\r\n\r\n/** \r\n * @file A plugin that allows you to add event listeners on objects. Have your code called alongside an event!\r\n * \r\n * @version {@versionPlaceholder}\r\n * @author https://github.com/doubleactii\r\n * @copyright Copyright (c) 2022 Evitca Studio\r\n * @license Pulse is free software, available under the terms of a MIT style License.\r\n */\r\nclass PulseComponent {\r\n\t/**\r\n\t * Array that tracks events for instances\r\n\t * @private\r\n\t * @type {Array}\r\n\t */\r\n\tstatic tracker = { 'ids': [] };\r\n\t/**\r\n\t * Array of stored IDs so that multiple of the same ID cannot be claimed\r\n\t * @private\r\n\t * @type {Array}\r\n\t */\r\n\tstatic storedIDs = [];\r\n\r\n\tconstructor() {\r\n\t\t/**\r\n\t\t * The logger module this module uses to log errors / logs\r\n\t\t * @private\r\n\t\t * @type {Object}\r\n\t\t */\r\n\t\tthis.logger = new Logger();\r\n        this.logger.registerType('PulseComponent-Module', '#ff6600');\r\n        this.logger.prefix('PulseComponent-Module').log(`✅@v${__VERSION__}`);\r\n\t}\r\n\t\r\n\t/**\r\n\t * Generates a random ID based on the specified length and ensures its uniqueness\r\n\t * within the stored IDs.\r\n\t * @private\r\n\t * @param {number} [pID = 7] - The length of the generated ID.\r\n\t * @returns {string} A unique random ID.\r\n\t */\r\n\tgenerateID(pID = 7) {\r\n\t\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r\n\t\tconst makeID = function() {\r\n\t\t\tlet ID = '';\r\n\t\t\tfor (let i = 0; i < pID; i++) {\r\n\t\t\t\tID += chars.charAt(Math.floor(Math.random() * chars.length));\r\n\t\t\t}\r\n\t\t\treturn ID;\r\n\t\t}\r\n\t\tlet ID = makeID();\r\n\t\twhile(PulseComponent.storedIDs.includes(ID)) {\r\n\t\t\tID = makeID();\r\n\t\t}\r\n\t\tPulseComponent.storedIDs.push(ID);\r\n\t\treturn ID;\r\n\t}\r\n\t/**\r\n\t * Adds an event listener function to pInstance to call whenever pEventName is called\r\n\t * \r\n\t * @param {Object} pInstance - The instance to add an event listener to\r\n\t * @param {string} pEventName - The name of the event to add the listener to\r\n\t * @param {Function} pFunction - The function to be called when this event is called\r\n\t */\r\n\ton(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\r\n\t\tif (!pInstance.pulseComponentListenerID) {\r\n\t\t\tconst ID = this.generateID();\r\n\t\t\tpInstance.pulseComponentListenerID = ID;\r\n\t\t\tPulseComponent.tracker.ids.push(ID);\r\n\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID] = {};\r\n\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'] = {};\r\n\t\t}\r\n\r\n\t\tif (!PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName] = { 'counter': 0 };\r\n\t\tconst listenerID = ++PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName].counter;\r\n\t\tif (!PulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);\r\n\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] = pFunction;\r\n\t\t// If the event name is `onNew` then call immedietly, there is no way to capture this event\r\n\t\tif (pEventName === 'onNew') PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();\r\n\t};\r\n\r\n\t/**\r\n\t * Removes an event listener function from pInstance\r\n\t * \r\n\t * @param {Object} pInstance - The instance to remove the event listener from\r\n\t * @param {string} pEventName - The name of the event to remove\r\n\t * @param {Function} pFunction - The function to be removed\r\n\t */\r\n\toff(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\t\tfor (const listenerID in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {\r\n\t\t\tif (PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID] === pFunction) {\r\n\t\t\t\tdelete PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listenerID];\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t}\r\n\t\tthis.logger.prefix('PulseComponent-Module').error('This function is not being tracked.');\r\n\t};\r\n\r\n\t/**\r\n\t * Listens for an event on an instance. Preserves any original event function code, while also allowing multiple event listeners to call on the same event.\r\n\t * @private\r\n\t * @param {Object} pInstance - The instance that has the event\r\n\t * @param {string} pEventName - The event name to listen for\r\n\t */\r\n\tlistenForEvent(pInstance, pEventName) {\r\n\t\t// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events\r\n\t\tlet originalEvent = pInstance[pEventName];\r\n\t\tconst listener = function() {\r\n\t\t\tif (typeof(originalEvent) === 'function') {\r\n\t\t\t\toriginalEvent.apply(pInstance, arguments);\r\n\t\t\t}\r\n\t\t\t// Loop the event name in the tracker to see if multiple events have been registered, if so we need to call each event when this event is dispatched.\r\n\t\t\tfor (const listener in PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName]) {\r\n\t\t\t\tif (typeof(PulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener]) === 'function') {\r\n\t\t\t\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tpInstance[pEventName] = listener;\r\n\t\tPulseComponent.tracker[pInstance.pulseComponentListenerID]['listened'][pEventName] = true;\r\n\t};\r\n}\r\n\r\nexport const Pulse = new PulseComponent();\r\n",
+    "content": "import { Logger } from './vendor/logger.min.mjs';\r\n\r\n/** \r\n * @file A plugin that allows you to add event listeners on objects. Have your code called alongside an event!\r\n * \r\n * @version {@versionPlaceholder}\r\n * @author https://github.com/doubleactii\r\n * @copyright Copyright (c) 2022 Evitca Studio\r\n * @license Pulse is free software, available under the terms of a MIT style License.\r\n */\r\nclass PulseComponent {\r\n\t/**\r\n\t * Array that tracks events for instances\r\n\t * @private\r\n\t * @type {Array}\r\n\t */\r\n\tstatic tracker = { 'ids': [] };\r\n\t/**\r\n\t * Array of stored IDs so that multiple of the same ID cannot be claimed\r\n\t * @private\r\n\t * @type {Array}\r\n\t */\r\n\tstatic storedIDs = [];\r\n\t/**\r\n\t * Weakmap to track data belonging to instances used in this module.\r\n\t * @private\r\n\t * @type {WeakMap}\r\n\t */\r\n\tinstanceWeakMap = new WeakMap();\r\n\r\n\tconstructor() {\r\n\t\t/**\r\n\t\t * The logger module this module uses to log errors / logs\r\n\t\t * @private\r\n\t\t * @type {Object}\r\n\t\t */\r\n\t\tthis.logger = new Logger();\r\n        this.logger.registerType('PulseComponent-Module', '#ff6600');\r\n        this.logger.prefix('PulseComponent-Module').log(`✅@v${__VERSION__}`);\r\n\t}\r\n\t\r\n\t/**\r\n\t * Generates a random ID based on the specified length and ensures its uniqueness\r\n\t * within the stored IDs.\r\n\t * @private\r\n\t * @param {number} [pID = 7] - The length of the generated ID.\r\n\t * @returns {string} A unique random ID.\r\n\t */\r\n\tgenerateID(pID = 7) {\r\n\t\tconst chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r\n\t\tconst makeID = function() {\r\n\t\t\tlet ID = '';\r\n\t\t\tfor (let i = 0; i < pID; i++) {\r\n\t\t\t\tID += chars.charAt(Math.floor(Math.random() * chars.length));\r\n\t\t\t}\r\n\t\t\treturn ID;\r\n\t\t}\r\n\t\tlet ID = makeID();\r\n\t\twhile(PulseComponent.storedIDs.includes(ID)) {\r\n\t\t\tID = makeID();\r\n\t\t}\r\n\t\tPulseComponent.storedIDs.push(ID);\r\n\t\treturn ID;\r\n\t}\r\n\t/**\r\n\t * Adds an event listener function to pInstance to call whenever pEventName is called\r\n\t * \r\n\t * @param {Object} pInstance - The instance to add an event listener to\r\n\t * @param {string} pEventName - The name of the event to add the listener to\r\n\t * @param {Function} pFunction - The function to be called when this event is called\r\n\t */\r\n\ton(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\r\n\t\t// Get the data stored for this instance\r\n\t\tlet pulseComponentListenerID = this.instanceWeakMap.get(pInstance);\r\n\t\t// If it couldn't get any data stored, we need to generate an ID and store it\r\n\t\tif (!pulseComponentListenerID) {\r\n\t\t\tconst ID = this.generateID();\r\n\t\t\tpulseComponentListenerID = ID;\r\n\t\t\tthis.instanceWeakMap.set(pInstance, pulseComponentListenerID);\r\n\t\t\tPulseComponent.tracker.ids.push(pulseComponentListenerID);\r\n\t\t\tPulseComponent.tracker[pulseComponentListenerID] = {};\r\n\t\t\tPulseComponent.tracker[pulseComponentListenerID]['listened'] = {};\r\n\t\t}\r\n\t\tif (!PulseComponent.tracker[pulseComponentListenerID][pEventName]) PulseComponent.tracker[pulseComponentListenerID][pEventName] = { 'counter': 0 };\r\n\t\tconst listenerID = ++PulseComponent.tracker[pulseComponentListenerID][pEventName].counter;\r\n\t\tif (!PulseComponent.tracker[pulseComponentListenerID]['listened'][pEventName]) this.listenForEvent(pInstance, pEventName);\r\n\t\tPulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID] = pFunction;\r\n\t\t// If the event name is `onNew` then call immedietly, there is no way to capture this event\r\n\t\tif (pEventName === 'onNew') PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID].bind(pInstance)();\r\n\t};\r\n\r\n\t/**\r\n\t * Removes an event listener function from pInstance\r\n\t * \r\n\t * @param {Object} pInstance - The instance to remove the event listener from\r\n\t * @param {string} pEventName - The name of the event to remove\r\n\t * @param {Function} pFunction - The function to be removed\r\n\t */\r\n\toff(pInstance, pEventName, pFunction) {\r\n\t\tif (typeof(pFunction) !== 'function') {\r\n\t\t\tthis.logger.prefix('PulseComponent-Module').error('pFunction argument is missing or it is not of the function type!');\r\n\t\t\treturn;\r\n\t\t}\r\n\t\t// Get the data stored for this instance\r\n\t\tconst pulseComponentListenerID = this.instanceWeakMap.get(pInstance);\r\n\t\t// No event can be removed from this instance as its not even being tracked\r\n\t\tif (!pulseComponentListenerID) return;\r\n\r\n\t\tfor (const listenerID in PulseComponent.tracker[pulseComponentListenerID][pEventName]) {\r\n\t\t\tif (PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID] === pFunction) {\r\n\t\t\t\tdelete PulseComponent.tracker[pulseComponentListenerID][pEventName][listenerID];\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\t\t}\r\n\t\tthis.logger.prefix('PulseComponent-Module').error('This function is not being tracked.');\r\n\t};\r\n\r\n\t/**\r\n\t * Listens for an event on an instance. Preserves any original event function code, while also allowing multiple event listeners to call on the same event.\r\n\t * @private\r\n\t * @param {Object} pInstance - The instance that has the event\r\n\t * @param {string} pEventName - The event name to listen for\r\n\t */\r\n\tlistenForEvent(pInstance, pEventName) {\r\n\t\t// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events\r\n\t\tlet originalEvent = pInstance[pEventName];\r\n\t\t// Get the data stored for this instance\r\n\t\tconst pulseComponentListenerID = this.instanceWeakMap.get(pInstance);\r\n\t\tconst listener = function() {\r\n\t\t\tif (typeof(originalEvent) === 'function') {\r\n\t\t\t\toriginalEvent.apply(pInstance, arguments);\r\n\t\t\t}\r\n\t\t\t// Loop the event name in the tracker to see if multiple events have been registered, if so we need to call each event when this event is dispatched.\r\n\t\t\tfor (const listener in PulseComponent.tracker[pulseComponentListenerID][pEventName]) {\r\n\t\t\t\tif (typeof(PulseComponent.tracker[pulseComponentListenerID][pEventName][listener]) === 'function') {\r\n\t\t\t\t\tPulseComponent.tracker[pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\tpInstance[pEventName] = listener;\r\n\t\tPulseComponent.tracker[pulseComponentListenerID]['listened'][pEventName] = true;\r\n\t};\r\n}\r\n\r\nexport const Pulse = new PulseComponent();\r\n",
     "static": true,
     "longname": "C:/Users/jared/Documents/Github/Pulse/src/pulse.mjs",
     "access": "public",
@@ -586,7 +586,7 @@
     "importPath": "./src/pulse.mjs",
     "importStyle": "{Pulse}",
     "description": null,
-    "lineNumber": 134,
+    "lineNumber": 150,
     "undocument": true,
     "type": {
       "types": [
@@ -669,6 +669,25 @@
   },
   {
     "__docId__": 53,
+    "kind": "member",
+    "name": "instanceWeakMap",
+    "memberof": "src/pulse.mjs~PulseComponent",
+    "static": false,
+    "longname": "src/pulse.mjs~PulseComponent#instanceWeakMap",
+    "access": "private",
+    "description": "Weakmap to track data belonging to instances used in this module.",
+    "lineNumber": 29,
+    "type": {
+      "nullable": null,
+      "types": [
+        "WeakMap"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 54,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -678,11 +697,11 @@
     "longname": "src/pulse.mjs~PulseComponent#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 31,
     "undocument": true
   },
   {
-    "__docId__": 54,
+    "__docId__": 55,
     "kind": "member",
     "name": "logger",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -690,7 +709,7 @@
     "longname": "src/pulse.mjs~PulseComponent#logger",
     "access": "private",
     "description": "The logger module this module uses to log errors / logs",
-    "lineNumber": 31,
+    "lineNumber": 37,
     "type": {
       "nullable": null,
       "types": [
@@ -701,7 +720,7 @@
     }
   },
   {
-    "__docId__": 55,
+    "__docId__": 56,
     "kind": "method",
     "name": "generateID",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -711,7 +730,7 @@
     "longname": "src/pulse.mjs~PulseComponent#generateID",
     "access": "private",
     "description": "Generates a random ID based on the specified length and ensures its uniqueness\nwithin the stored IDs.",
-    "lineNumber": 43,
+    "lineNumber": 49,
     "unknown": [
       {
         "tagName": "@returns",
@@ -742,7 +761,7 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 57,
     "kind": "method",
     "name": "on",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -752,7 +771,7 @@
     "longname": "src/pulse.mjs~PulseComponent#on",
     "access": "public",
     "description": "Adds an event listener function to pInstance to call whenever pEventName is called",
-    "lineNumber": 66,
+    "lineNumber": 72,
     "params": [
       {
         "nullable": null,
@@ -788,7 +807,7 @@
     "return": null
   },
   {
-    "__docId__": 57,
+    "__docId__": 58,
     "kind": "method",
     "name": "off",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -798,7 +817,7 @@
     "longname": "src/pulse.mjs~PulseComponent#off",
     "access": "public",
     "description": "Removes an event listener function from pInstance",
-    "lineNumber": 95,
+    "lineNumber": 104,
     "params": [
       {
         "nullable": null,
@@ -834,7 +853,7 @@
     "return": null
   },
   {
-    "__docId__": 58,
+    "__docId__": 59,
     "kind": "method",
     "name": "listenForEvent",
     "memberof": "src/pulse.mjs~PulseComponent",
@@ -844,7 +863,7 @@
     "longname": "src/pulse.mjs~PulseComponent#listenForEvent",
     "access": "private",
     "description": "Listens for an event on an instance. Preserves any original event function code, while also allowing multiple event listeners to call on the same event.",
-    "lineNumber": 115,
+    "lineNumber": 129,
     "params": [
       {
         "nullable": null,

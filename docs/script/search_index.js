@@ -1,14 +1,14 @@
 window.esdocSearchIndex = [
   [
-    "./src/pulse.mjs~pulse",
+    "pulse/src/pulse.mjs~pulse",
     "variable/index.html#static-variable-Pulse",
-    "<span>Pulse</span> <span class=\"search-result-import-path\">./src/pulse.mjs</span>",
+    "<span>Pulse</span> <span class=\"search-result-import-path\">pulse/src/pulse.mjs</span>",
     "variable"
   ],
   [
-    "./src/pulse.mjs~pulsecomponent",
+    "pulse/src/pulse.mjs~pulsecomponent",
     "class/src/pulse.mjs~PulseComponent.html",
-    "<span>PulseComponent</span> <span class=\"search-result-import-path\">./src/pulse.mjs</span>",
+    "<span>PulseComponent</span> <span class=\"search-result-import-path\">pulse/src/pulse.mjs</span>",
     "class"
   ],
   [
@@ -340,6 +340,12 @@ window.esdocSearchIndex = [
     "class/src/pulse.mjs~PulseComponent.html#instance-method-on",
     "src/pulse.mjs~PulseComponent#on",
     "method"
+  ],
+  [
+    "src/pulse.mjs~pulsecomponent#version",
+    "class/src/pulse.mjs~PulseComponent.html#instance-member-version",
+    "src/pulse.mjs~PulseComponent#version",
+    "member"
   ],
   [
     "src/pulse.mjs~pulsecomponent.storedids",

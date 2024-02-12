@@ -109,6 +109,14 @@ class PulseComponent {
 	 * @param {Function} pFunction - The function to be called when this event is called
 	 */
 	on(pInstance, pEventName, pFunction) {
+		if (!pInstance) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pInstance not passed.&apos;);
+			return;
+		}
+		if (!pEventName) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pEventName not passed.&apos;);
+			return;
+		}
 		if (typeof(pFunction) !== &apos;function&apos;) {
 			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pFunction argument is missing or it is not of the function type!&apos;);
 			return;
@@ -141,6 +149,14 @@ class PulseComponent {
 	 * @param {Function} pFunction - The function to be removed
 	 */
 	off(pInstance, pEventName, pFunction) {
+		if (!pInstance) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pInstance not passed.&apos;);
+			return;
+		}
+		if (!pEventName) {
+			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pEventName not passed.&apos;);
+			return;
+		}
 		if (typeof(pFunction) !== &apos;function&apos;) {
 			this.logger.prefix(&apos;PulseComponent-Module&apos;).error(&apos;pFunction argument is missing or it is not of the function type!&apos;);
 			return;

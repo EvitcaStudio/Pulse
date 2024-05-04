@@ -35,7 +35,16 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="pulse">Pulse</h1><p>A plugin that allows you to add event listeners on objects. Have your code called alongside an event!</p>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="pulse-module">Pulse Module</h1><p>A plugin that allows you to add event listeners on objects. Have your code called alongside an event!</p>
+<h2 id="installation">Installation</h2><h3 id="es-module">ES Module</h3><pre><code class="lang-js"><code class="source-code prettyprint">import { Pulse } from &apos;./pulse.mjs&apos;;</code>
+</code></pre>
+<h3 id="iife--immediately-invoked-function-expression-">IIFE (Immediately Invoked Function Expression)</h3><pre><code class="lang-js"><code class="source-code prettyprint">&lt;script src=&quot;pulse.js&quot;&gt;&lt;/script&gt;;
+// ...
+window.PulseBundle.Pulse;</code>
+</code></pre>
+<h3 id="commonjs--cjs--module">CommonJS (CJS) Module</h3><pre><code class="lang-js"><code class="source-code prettyprint">const { Pulse } = require(&apos;./pulse.cjs.js&apos;);</code>
+</code></pre>
+<h3 id="global-dependency">Global Dependency</h3><p>Pulse relies on the <code>VYLO</code> variable being globally accessible.</p>
 </div>
 </div>
 

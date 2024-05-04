@@ -1,14 +1,14 @@
 window.esdocSearchIndex = [
   [
-    "pulse/src/pulse.mjs~pulse",
+    "pulse~pulse",
     "variable/index.html#static-variable-Pulse",
-    "<span>Pulse</span> <span class=\"search-result-import-path\">pulse/src/pulse.mjs</span>",
+    "<span>Pulse</span> <span class=\"search-result-import-path\">pulse</span>",
     "variable"
   ],
   [
-    "pulse/src/pulse.mjs~pulsecomponent",
+    "pulse~pulsecomponent",
     "class/src/pulse.mjs~PulseComponent.html",
-    "<span>PulseComponent</span> <span class=\"search-result-import-path\">pulse/src/pulse.mjs</span>",
+    "<span>PulseComponent</span> <span class=\"search-result-import-path\">pulse</span>",
     "class"
   ],
   [

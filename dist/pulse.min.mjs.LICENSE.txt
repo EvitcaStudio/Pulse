@@ -1,6 +1,0 @@
-/** 
- * @file A plugin that allows you to add event listeners on objects. Have your code called alongside an event!
- * 
- * @author https://github.com/doubleactii
- * @license Pulse is free software, available under the terms of a MIT style License.
- */

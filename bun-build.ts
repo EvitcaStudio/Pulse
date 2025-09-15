@@ -1,5 +1,8 @@
+// @ts-ignore
 import Bun from 'bun';
+// @ts-ignore
 import chalk from 'chalk';
+// @ts-ignore
 import packageJson from './package.json';
 
 const banner = [
@@ -25,7 +28,7 @@ await Promise.all([
     // ES Module version
     Bun.build({
         entrypoints: ['./src/index.ts'],
-        outdir: './dist/',
+        outdir: './dist/esm/',
         naming: `${packageJson.name}.js`,
         banner: banner,
         target: 'browser',
@@ -37,7 +40,7 @@ await Promise.all([
     // ES Module minified version
     Bun.build({
         entrypoints: ['./src/index.ts'],
-        outdir: './dist/',
+        outdir: './dist/min/',
         naming: `${packageJson.name}.min.js`,
         minify: true,
         banner: banner,
@@ -49,7 +52,7 @@ await Promise.all([
     // IIFE version
     Bun.build({
         entrypoints: ['./src/index.ts'],
-        outdir: './dist/',
+        outdir: './dist/iife/',
         naming: `${packageJson.name}-iife.js`,
         format: 'iife',
         minify: false,
@@ -61,7 +64,7 @@ await Promise.all([
     // IIFE minified version
     Bun.build({
         entrypoints: ['./src/index.ts'],
-        outdir: './dist/',
+        outdir: './dist/iife/',
         naming: `${packageJson.name}-iife.min.js`,
         format: 'iife',
         minify: true,
@@ -74,10 +77,10 @@ await Promise.all([
 
 // Replace VERSION_REPLACE_ME with actual version in all generated files
 const filesToUpdate = [
-    `dist/${packageJson.name}.js`,
-    `dist/${packageJson.name}.min.js`,
-    `dist/${packageJson.name}-iife.js`,
-    `dist/${packageJson.name}-iife.min.js`
+    `dist/esm/${packageJson.name}.js`,
+    `dist/min/${packageJson.name}.min.js`,
+    `dist/iife/${packageJson.name}-iife.js`,
+    `dist/iife/${packageJson.name}-iife.min.js`
 ];
 
 for (const file of filesToUpdate) {

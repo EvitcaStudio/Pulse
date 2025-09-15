@@ -1,3 +1,4 @@
+// @ts-ignore - Logger is a vendor file without types
 import { Logger } from './vendor/logger.min.mjs';
 
 /** 
@@ -9,33 +10,30 @@ import { Logger } from './vendor/logger.min.mjs';
 class PulseComponent {
 	/**
 	 * Array that tracks events for instances
-	 * @private
 	 * @type {Array}
 	 */
-	static tracker = { 'ids': [] };
+	static tracker: { ids: string[]; [key: string]: any } = { 'ids': [] };
 	/**
 	 * Array of stored IDs so that multiple of the same ID cannot be claimed
-	 * @private
 	 * @type {Array}
 	 */
-	static storedIDs = [];
+	static storedIDs: string[] = [];
 	/**
 	 * Weakmap to track data belonging to instances used in this module.
-	 * @private
 	 * @type {WeakMap}
 	 */
-	instanceWeakMap = new WeakMap();
+	instanceWeakMap = new WeakMap<object, string>();
 	/**
 	 * The version of the module.
 	 */
 	version = "VERSION_REPLACE_ME";
+	/**
+	 * The logger module this module uses to log errors / logs
+	 * @type {Object}
+	 */
+	private logger: any;
 
 	constructor() {
-		/**
-		 * The logger module this module uses to log errors / logs
-		 * @private
-		 * @type {Object}
-		 */
 		this.logger = new Logger();
         this.logger.registerType('PulseComponent-Module', '#ff6600');
 	}
@@ -43,13 +41,12 @@ class PulseComponent {
 	/**
 	 * Generates a random ID based on the specified length and ensures its uniqueness
 	 * within the stored IDs.
-	 * @private
 	 * @param {number} [pID = 7] - The length of the generated ID.
 	 * @returns {string} A unique random ID.
 	 */
-	generateID(pID = 7) {
+	generateID(pID: number = 7): string {
 		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		const makeID = function() {
+		const makeID = function(): string {
 			let ID = '';
 			for (let i = 0; i < pID; i++) {
 				ID += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -70,7 +67,7 @@ class PulseComponent {
 	 * @param {string} pEventName - The name of the event to add the listener to
 	 * @param {Function} pFunction - The function to be called when this event is called
 	 */
-	on(pInstance, pEventName, pFunction) {
+	on(pInstance: any, pEventName: string, pFunction: Function): void {
 		if (!pInstance) {
 			this.logger.prefix('PulseComponent-Module').error('pInstance not passed.');
 			return;
@@ -110,7 +107,7 @@ class PulseComponent {
 	 * @param {string} pEventName - The name of the event to remove
 	 * @param {Function} pFunction - The function to be removed
 	 */
-	off(pInstance, pEventName, pFunction) {
+	off(pInstance: any, pEventName: string, pFunction: Function): void {
 		if (!pInstance) {
 			this.logger.prefix('PulseComponent-Module').error('pInstance not passed.');
 			return;
@@ -139,23 +136,27 @@ class PulseComponent {
 
 	/**
 	 * Listens for an event on an instance. Preserves any original event function code, while also allowing multiple event listeners to call on the same event.
-	 * @private
 	 * @param {Object} pInstance - The instance that has the event
 	 * @param {string} pEventName - The event name to listen for
 	 */
-	listenForEvent(pInstance, pEventName) {
+	listenForEvent(pInstance: any, pEventName: string): void {
 		// If there was a valid event for this type, or there was one already defined then we need to modify it to allow listening events
 		let originalEvent = pInstance[pEventName];
 		// Get the data stored for this instance
 		const pulseComponentListenerID = this.instanceWeakMap.get(pInstance);
-		const listener = function() {
+		if (!pulseComponentListenerID) return;
+		
+		const listener = function(this: any) {
 			if (typeof(originalEvent) === 'function') {
 				originalEvent.apply(pInstance, arguments);
 			}
 			// Loop the event name in the tracker to see if multiple events have been registered, if so we need to call each event when this event is dispatched.
-			for (const listener in PulseComponent.tracker[pulseComponentListenerID][pEventName]) {
-				if (typeof(PulseComponent.tracker[pulseComponentListenerID][pEventName][listener]) === 'function') {
-					PulseComponent.tracker[pulseComponentListenerID][pEventName][listener].apply(pInstance, arguments);
+			const eventTracker = PulseComponent.tracker[pulseComponentListenerID][pEventName];
+			if (eventTracker) {
+				for (const listener in eventTracker) {
+					if (typeof(eventTracker[listener]) === 'function') {
+						eventTracker[listener].apply(pInstance, arguments);
+					}
 				}
 			}
 		}
@@ -165,3 +166,4 @@ class PulseComponent {
 }
 
 export const Pulse = new PulseComponent();
+export { PulseComponent };

@@ -1,32 +1,30 @@
 {
   "name": "pulse",
   "version": "2.0.0",
-  "description": "A plugin that allows you to add event listeners on objects. Have your code called alongside an event!",
+  "author": "https://github.com/doubleactii",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EvitcaStudio/Pulse.git"
+  },
   "main": "dist/pulse.js",
-  "types": "dist/pulse.d.ts",
+  "devDependencies": {
+    "bun-types": "latest",
+    "chalk": "^5.6.2",
+    "typedoc": "^0.25.0",
+    "typescript": "^5.0.0"
+  },
+  "description": "A plugin that allows you to add event listeners on objects. Have your code called alongside an event!",
   "files": [
     "dist/**/*",
     "docs/**/*"
   ],
+  "keywords": [],
+  "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "bun run bun-build.ts && npx tsc --declaration --emitDeclarationOnly --declarationMap false --sourceMap false",
     "build:docs": "typedoc",
     "build:dist": "bun run build && bun run build:docs"
   },
-  "keywords": [],
-  "author": "https://github.com/doubleactii",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/EvitcaStudio/Pulse.git"
-  },
-  "devDependencies": {
-    "bun-types": "latest",
-    "typescript": "^5.0.0",
-    "typedoc": "^0.25.0"
-  },
-  "dependencies": {
-    "chalk": "^5.6.2"
-  }
+  "types": "dist/pulse.d.ts"
 }
